@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS STYLES -->
+    <style>
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        body {
+            background-color: hsla(42, 100%, 61%, 0.439);
+            font-family: 'Cardo', serif;
+        }
+
+        .profile-card {
+            min-width:300px;
+            max-width: 350px;
+            background-color: #fff;
+            border-radius: 15px;
+            margin: 0 auto;
+        }
+
+        .card-img {
+            width: 100%;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .name {
+            font-size: 1.5rem;
+            font-family: 'Cardo', serif;
+        }
+
+        .card-body {
+            margin: 1rem 2rem;
+        }
+
+        #day, .name, #time, .track, .repo {
+            margin-top: 0;
+        }
+
+        .label {
+            margin: 0;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body onload="startTime()">
+    <div class="container">
+        <div class="profile-card">
+            <img src="./images/profile.png" alt="" class="card-img" data-testid="slackDisplayImage">
+            <div class="card-body">
+                <p class="label">Slack Name:</p>
+                <p class="card-header name" data-testid="slackUserName" aria-label="name">Tabe Success Nse</p>
+                <p class="label" >Day of the week:</p>
+                <p id="day" data-testid="currentDayOfTheWeek" aria-label="Day">Friday</p>
+                <p class="label" >Current Time:</p>
+                <p id="time" data-testid="currentUTCTime" aria-label="time">07:00 pm</p>
+                <p class="label">Track:</p>
+                <p class="track" data-testid="myTrack" aria-label="track">Frontend</p>
+                <p class="label">Link:</p>
+                <a href="https://github.com/Tabebash/HNGx-Stage-One" class="repo" data-testid="githubURL">Github Repository</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+        function startTime() {
+        let today = new Date();
+        let h = today.getHours();
+        let m = today.getMinutes();
+        let s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('time').innerHTML =  h + ":" + m + ":" + s;
+        setTimeout(startTime, 1000);
+        }
+    
+        function checkTime(i) {
+        if (i < 10) {i = "0" + i};
+        return i;
+        }
+    
+    
+        let weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    
+        const d = new Date();
+        let today = weekday[d.getDay()];
+        document.getElementById("day").innerHTML = today;
+    </script>
+</body>
+</html>
